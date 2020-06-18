@@ -14,6 +14,10 @@ tasks:
         service: cli
         shell: bash
     - run:
+        name: drush cset
+        command: drush cset system.site uuid $(cat config/sync/system.site.yml | awk '/uuid/ {print $2}')
+        service: cli
+    - run:
         name: drush cim
         command: drush -y cim
         service: cli
