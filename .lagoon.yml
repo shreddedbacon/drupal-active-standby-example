@@ -1,0 +1,49 @@
+docker-compose-yaml: docker-compose.yml
+
+project: drupal-active-standby-example
+
+tasks:
+  post-rollout:
+    - run:
+        name: IF no Drupal installed and we are not master branch, sync from master brancy
+        command: |
+            if tables=$(drush sqlq 'show tables;') && [ -z "$tables" ] && [[ "$LAGOON_GIT_BRANCH" != "master" ]]; then
+                # no drupal installed, sync DB from master branch
+                drush -y sql-sync @master @self
+            fi
+        service: cli
+        shell: bash
+    - run:
+        name: drush cim
+        command: drush -y cim
+        service: cli
+    - run:
+        name: drush updb
+        command: drush -y updb
+        service: cli
+    - run:
+        name: drush cr
+        command: drush -y cr
+        service: cli
+
+production_routes:
+  active:
+    routes:
+      - nginx:
+        - "drupal-as-demo.au.amazee.io":
+            tls-acme: true
+        - "drupal-as-demo-active.au.amazee.io":
+            tls-acme: true
+  standby:
+    routes:
+      - nginx:
+        - "drupal-as-demo-standby.au.amazee.io":
+            tls-acme: true
+
+environments:
+  master:
+    cronjobs:
+      - name: drush cron
+        schedule: "*/15 * * * *"
+        command: drush cron
+        service: cli
