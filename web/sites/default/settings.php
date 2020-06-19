@@ -137,17 +137,17 @@ if (getenv('LAGOON')) {
 
 ### Trusted Host Patterns, see https://www.drupal.org/node/2410395 for more information.
 ### If your site runs on multiple domains, you need to add these domains here.
-if (getenv('LAGOON_ROUTES')) {
-  $settings['trusted_host_patterns'] = array(
-    '^' . str_replace(['.', 'https://', 'http://', ','], ['\.', '', '', '|'], getenv('LAGOON_ROUTES')) . '$', // escape dots, remove schema, use commas as regex separator
-   );
-}
-if (getenv('LAGOON_STANDBY_ROUTES')) {
-  $settings['trusted_host_patterns'][] = ['^' . str_replace(['.', 'https://', 'http://', ','], ['\.', '', '', '|'], getenv('LAGOON_STANDBY_ROUTES')) . '$'];
-}
-if (getenv('LAGOON_ACTIVE_ROUTES')) {
-  $settings['trusted_host_patterns'][] = ['^' . str_replace(['.', 'https://', 'http://', ','], ['\.', '', '', '|'], getenv('LAGOON_ACTIVE_ROUTES')) . '$'];
-}
+// if (getenv('LAGOON_ROUTES')) {
+//   $settings['trusted_host_patterns'] = array(
+//     '^' . str_replace(['.', 'https://', 'http://', ','], ['\.', '', '', '|'], getenv('LAGOON_ROUTES')) . '$', // escape dots, remove schema, use commas as regex separator
+//    );
+// }
+// if (getenv('LAGOON_STANDBY_ROUTES')) {
+//   $settings['trusted_host_patterns'][] = ['^' . str_replace(['.', 'https://', 'http://', ','], ['\.', '', '', '|'], getenv('LAGOON_STANDBY_ROUTES')) . '$'];
+// }
+// if (getenv('LAGOON_ACTIVE_ROUTES')) {
+//   $settings['trusted_host_patterns'][] = ['^' . str_replace(['.', 'https://', 'http://', ','], ['\.', '', '', '|'], getenv('LAGOON_ACTIVE_ROUTES')) . '$'];
+// }
 
 ### Temp directory.
 if (getenv('TMP')) {
