@@ -142,6 +142,12 @@ if (getenv('LAGOON_ROUTES')) {
     '^' . str_replace(['.', 'https://', 'http://', ','], ['\.', '', '', '|'], getenv('LAGOON_ROUTES')) . '$', // escape dots, remove schema, use commas as regex separator
    );
 }
+if (getenv('LAGOON_STANDBY_ROUTES')) {
+  $settings['trusted_host_patterns'][] = ['^' . str_replace(['.', 'https://', 'http://', ','], ['\.', '', '', '|'], getenv('LAGOON_STANDBY_ROUTES')) . '$'];
+}
+if (getenv('LAGOON_ACTIVE_ROUTES')) {
+  $settings['trusted_host_patterns'][] = ['^' . str_replace(['.', 'https://', 'http://', ','], ['\.', '', '', '|'], getenv('LAGOON_ACTIVE_ROUTES')) . '$'];
+}
 
 ### Temp directory.
 if (getenv('TMP')) {
