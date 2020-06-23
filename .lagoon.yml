@@ -35,7 +35,7 @@ production_routes:
     routes:
       - nginx:
         - "demo.shreddedbacon.com":
-            tls-acme: true
+            tls-acme: 'true'
 
 environments:
   master:
