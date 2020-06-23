@@ -34,14 +34,7 @@ production_routes:
   active:
     routes:
       - nginx:
-        - "drupal-as-demo.au.amazee.io":
-            tls-acme: true
-        - "drupal-as-demo-active.au.amazee.io":
-            tls-acme: true
-  standby:
-    routes:
-      - nginx:
-        - "drupal-as-demo-standby.au.amazee.io":
+        - "demo.shreddedbacon.com":
             tls-acme: true
 
 environments:
